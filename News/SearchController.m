@@ -9,10 +9,14 @@
 #import "SearchController.h"
 #import "SearchView.h"
 #import "DetailController.h"
+#import "NetworkService.h"
+#import "News.h"
 
 @interface SearchController ()
 
 @property (strong,nonatomic) SearchView *searchView;
+@property (strong,nonatomic) NetworkService *networkService;
+@property (strong,nonatomic) NSArray *searchResults;
 
 @end
 
@@ -26,21 +30,38 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.networkService = [[NetworkService alloc] init];
     self.searchView.searchBar.delegate = self;
     self.searchView.tableView.dataSource = self;
     self.searchView.tableView.delegate = self;
+    [self getNewsWithQuery:@""];
+}
+
+- (void)getNewsWithQuery:(NSString * _Nullable)query {
+    //NSLog(@"searchBarText: %@", searchText);
+    [self.networkService getNewsWithQuery:query
+    onSuccess:^(NSArray * _Nonnull newsArray) {
+        NSLog(@"success");
+        self.searchResults = newsArray;
+        NSLog(@"%lu",(unsigned long)[newsArray count]);
+        [self.searchView.tableView reloadData];
+    }
+    onFailure:^(NSError * _Nonnull error) {
+        NSLog(@"error: %@", [error localizedDescription]);
+    }];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return [self.searchResults count];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
-    cell.textLabel.text = [NSString stringWithFormat:@"Cell %ld",(long)indexPath.row];
+    News *news = [self.searchResults objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",news.title];
     return cell;
 }
 
@@ -55,22 +76,7 @@
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if ([searchText  isEqual: @""]) {
-        //self.searchResults = @[];
-        //[self.searchView.tableView reloadData];
-
-    } else {
-        NSLog(@"searchBarText: %@", searchText);
-        //[self.searchService getAppsWithQuery:searchText
-        //onSuccess:^(NSArray * _Nonnull iTunesApps) {
-        //    self.searchResults = iTunesApps;
-        //    [self.searchView.tableView reloadData];
-        //}
-        //onFailure:^(NSError * _Nonnull error) {
-        //    NSLog(@"error: %@", [error localizedDescription]);
-        //}];
-        
-    }
+    [self getNewsWithQuery:searchText];
 }
 
 @end
