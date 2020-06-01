@@ -32,6 +32,7 @@
 
 - (void)configureSubviews {
     self.newsImageView = [[UIImageView alloc] init];
+    self.newsImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.newsImageView.layer.cornerRadius = 3;
     self.newsImageView.layer.masksToBounds = YES;
     [self addSubview:self.newsImageView];
@@ -55,7 +56,8 @@
         make.top.equalTo(self.mas_top).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(10);
         make.width.mas_equalTo(80);
-        make.bottom.equalTo(self.mas_bottom).with.inset(5);
+        make.height.mas_equalTo(55);
+        make.bottom.equalTo(self.mas_bottom).with.inset(5).priority(999);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).with.offset(0);
@@ -65,7 +67,6 @@
     [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).with.offset(5);
         make.left.equalTo(self.newsImageView.mas_right).with.offset(10);
-        make.right.equalTo(self.mas_right).with.inset(10);
         make.bottom.equalTo(self.mas_bottom).with.inset(5);
     }];
 }
