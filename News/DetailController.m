@@ -1,23 +1,22 @@
 //
-//  ViewController.m
+//  DetailController.m
 //  News
 //
 //  Created by Maksim Romanov on 01.06.2020.
 //  Copyright © 2020 Maksim Romanov. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "DetailController.h"
 
-@interface ViewController ()
+@interface DetailController ()
 
 @end
 
-@implementation ViewController
+@implementation DetailController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-
 
 @end

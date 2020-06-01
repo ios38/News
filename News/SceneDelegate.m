@@ -1,4 +1,5 @@
 #import "SceneDelegate.h"
+#import "SearchController.h"
 
 @interface SceneDelegate ()
 
@@ -8,6 +9,19 @@
 
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+    
+    if (self.window == nil && [scene isKindOfClass:[UIWindowScene class]]) {
+        self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
+    }
+    
+
+    SearchController *controller = [[SearchController alloc] init];
+    controller.navigationItem.title = @"Search News";
+
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:controller];
+    self.window.rootViewController = nc;
+    [self.window makeKeyAndVisible];
+
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).

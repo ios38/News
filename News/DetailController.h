@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DetailController.h
 //  News
 //
 //  Created by Maksim Romanov on 01.06.2020.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface DetailController : UIViewController
 
 @end
 
+NS_ASSUME_NONNULL_END
