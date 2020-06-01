@@ -55,17 +55,15 @@
         make.top.equalTo(self.mas_top).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(10);
         make.width.mas_equalTo(80);
-        make.height.mas_equalTo(50);
         make.bottom.equalTo(self.mas_bottom).with.inset(5);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).with.offset(0);
         make.left.equalTo(self.newsImageView.mas_right).with.offset(10);
         make.right.equalTo(self.mas_right).with.inset(10);
-        //make.bottom.equalTo(self.mas_bottom).with.inset(10);
     }];
     [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        //make.top.equalTo(self.mas_top).with.offset(0);
+        make.top.equalTo(self.titleLabel.mas_bottom).with.offset(5);
         make.left.equalTo(self.newsImageView.mas_right).with.offset(10);
         make.right.equalTo(self.mas_right).with.inset(10);
         make.bottom.equalTo(self.mas_bottom).with.inset(5);
