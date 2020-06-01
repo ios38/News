@@ -11,6 +11,7 @@
 #import "DetailController.h"
 #import "NetworkService.h"
 #import "News.h"
+#import "SearchCell.h"
 
 @interface SearchController ()
 
@@ -41,9 +42,7 @@
     //NSLog(@"searchBarText: %@", searchText);
     [self.networkService getNewsWithQuery:query
     onSuccess:^(NSArray * _Nonnull newsArray) {
-        NSLog(@"success");
         self.searchResults = newsArray;
-        NSLog(@"%lu",(unsigned long)[newsArray count]);
         [self.searchView.tableView reloadData];
     }
     onFailure:^(NSError * _Nonnull error) {
@@ -58,10 +57,13 @@
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
+    SearchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (!cell) {
+        cell = [[SearchCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
+    }
     News *news = [self.searchResults objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",news.title];
+    [cell configureWithNews:news];
+    
     return cell;
 }
 
@@ -70,6 +72,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DetailController *detailController = [[DetailController alloc] init];
+    News *news = [self.searchResults objectAtIndex:indexPath.row];
+    detailController.news = news;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

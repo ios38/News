@@ -7,7 +7,7 @@ target 'News' do
 
   # Pods for News
   pod 'AFNetworking','~> 4.0.1'
-  pod 'SDWebImage', '~> 5.8.0'
   pod 'Masonry', '~> 1.1.0'
+  pod 'SDWebImage', '~> 5.8.0'
 
 end

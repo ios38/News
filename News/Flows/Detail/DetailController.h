@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "News.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailController : UIViewController
+
+@property (strong,nonatomic) News *news;
 
 @end
 

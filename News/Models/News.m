@@ -13,9 +13,16 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+
         self.title = [dictionary valueForKey:@"title"];
         self.source = [dictionary valueForKey:@"source"];
-        self.date = [dictionary valueForKey:@"publishedAt"];
+        
+        NSString *strDate = [dictionary valueForKey:@"publishedAt"];
+        self.date = [dateFormatter dateFromString:strDate];
+
         self.newsDescription = [dictionary valueForKey:@"description"];
         self.content = [dictionary valueForKey:@"content"];
         self.imageUrl = [dictionary valueForKey:@"urlToImage"];

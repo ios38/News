@@ -24,32 +24,31 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self configureSubviews];
-        //[self setupConstraints];
+        [self setupConstraints];
     }
     return self;
 }
 
 - (void)configureSubviews {
-    //self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 95, self.bounds.size.width, 40)];
+    self.searchBar = [[UISearchBar alloc] init];
     [self addSubview:self.searchBar];
     
-    //self.tableView = [[UITableView alloc] init];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 140, self.bounds.size.width, self.bounds.size.height - 180)];
+    self.tableView = [[UITableView alloc] init];
     [self addSubview:self.tableView];
 }
 
 - (void)setupConstraints {
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top);
+        make.top.equalTo(self.mas_topMargin).with.offset(10);
         make.left.equalTo(self.mas_left);
         make.right.equalTo(self.mas_right);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(40);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.searchBar.mas_bottom);
+        make.top.equalTo(self.searchBar.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left);
         make.right.equalTo(self.mas_right);
+        make.bottom.equalTo(self.mas_bottomMargin);
     }];
 }
 
