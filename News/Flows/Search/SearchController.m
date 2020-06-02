@@ -39,7 +39,6 @@
 }
 
 - (void)getNewsWithQuery:(NSString * _Nullable)query {
-    //NSLog(@"searchBarText: %@", searchText);
     [self.networkService getNewsWithQuery:query
     onSuccess:^(NSArray * _Nonnull newsArray) {
         self.searchResults = newsArray;

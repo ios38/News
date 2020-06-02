@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DetailView : UIView
 
 @property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UILabel *authorLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UILabel *descriptionLabel;

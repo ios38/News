@@ -18,7 +18,13 @@
         dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
 
         self.title = [dictionary valueForKey:@"title"];
-        self.source = [dictionary valueForKey:@"source"];
+        
+        if ([dictionary valueForKey:@"author"] != (id)[NSNull null]) {
+            self.author = [dictionary valueForKey:@"author"];
+        } else if ([dictionary valueForKey:@"source"] != (id)[NSNull null]) {
+            NSDictionary *sourceDict = [dictionary valueForKey:@"source"];
+            self.author = [sourceDict valueForKey:@"name"];
+        };
         
         NSString *strDate = [dictionary valueForKey:@"publishedAt"];
         self.date = [dateFormatter dateFromString:strDate];
@@ -26,6 +32,7 @@
         self.newsDescription = [dictionary valueForKey:@"description"];
         self.content = [dictionary valueForKey:@"content"];
         self.imageUrl = [dictionary valueForKey:@"urlToImage"];
+        //NSLog(@"%@",self.imageUrl);
     }
     return self;
 }

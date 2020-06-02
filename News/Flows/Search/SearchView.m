@@ -7,6 +7,7 @@
 //
 
 #import "SearchView.h"
+#define MAS_SHORTHAND
 #import "Masonry.h"
 
 @implementation SearchView
@@ -38,17 +39,17 @@
 }
 
 - (void)setupConstraints {
-    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_topMargin).with.offset(10);
-        make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.mas_right);
+    [self.searchBar makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topMargin).with.offset(10);
+        make.left.equalTo(self.left);
+        make.right.equalTo(self.right);
         make.height.mas_equalTo(40);
     }];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.searchBar.mas_bottom).with.offset(10);
-        make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.mas_right);
-        make.bottom.equalTo(self.mas_bottomMargin);
+    [self.tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.searchBar.bottom).with.offset(10);
+        make.left.equalTo(self.left);
+        make.right.equalTo(self.right);
+        make.bottom.equalTo(self.bottomMargin);
     }];
 }
 

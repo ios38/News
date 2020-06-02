@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property (strong,nonatomic) NSString *title;
-@property (strong,nonatomic,nullable) NSString *source;
+@property (strong,nonatomic,nullable) NSString *author;
 @property (strong,nonatomic) NSDate *date;
 @property (strong,nonatomic,nullable) NSString *newsDescription;
 @property (strong,nonatomic,nullable) NSString *content;

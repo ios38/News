@@ -9,7 +9,6 @@
 #import "DetailController.h"
 #import "DetailView.h"
 #import <SDWebImage/SDWebImage.h>
-#import "ImageDownloader.h"
 
 @interface DetailController ()
 
@@ -30,11 +29,15 @@
     [super viewDidLoad];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"dd MMM yyyy hh-mm";
-    
+    [self fillView];
+}
+
+- (void)fillView {
     self.detailView.titleLabel.text = self.news.title;
+    self.detailView.authorLabel.text = self.news.author;
     self.detailView.dateLabel.text = [self.dateFormatter stringFromDate:self.news.date];
     [self.detailView.imageView sd_setImageWithURL:[NSURL URLWithString:self.news.imageUrl]];
     self.detailView.descriptionLabel.text = [NSString stringWithFormat:@"%@",self.news.newsDescription];
-}
 
+}
 @end
